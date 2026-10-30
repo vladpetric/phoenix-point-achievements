@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# ppach: read-only Phoenix Point achievement and save inspector.
+#
+# Reads the game's saves and Options.jopt, the game's sharedassets0.assets
+# and Steam's local stats cache. Writes only to its cache directory
+# (PPACH_CACHE, default ~/.cache/ppach). `ppach setup` creates a venv there
+# with UnityPy, which only the `progress` and `def` commands need.
+set -euo pipefail
+
+src=${BASH_SOURCE[0]}
+while [ -L "$src" ]; do
+  dir=$(cd -P "$(dirname "$src")" && pwd)
+  src=$(readlink "$src")
+  [[ $src == /* ]] || src=$dir/$src
+done
+root=$(cd -P "$(dirname "$src")/.." && pwd)
+cache=${PPACH_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/ppach}
+venv_py=$cache/venv/bin/python
+
+if [ "${1:-}" = setup ]; then
+  mkdir -p "$cache"
+  python3 -m venv "$cache/venv"
+  "$venv_py" -m pip install --quiet --upgrade pip
+  "$venv_py" -m pip install --quiet 'UnityPy==1.25.4'
+  echo "UnityPy installed in $cache/venv"
+  exit 0
+fi
+
+if [ -x "$venv_py" ]; then py=$venv_py; else py=$(command -v python3); fi
+exec "$py" -I "$root/ppach/cli.py" "$@"
