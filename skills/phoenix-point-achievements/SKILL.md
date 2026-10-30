@@ -1,6 +1,6 @@
 ---
 name: phoenix-point-achievements
-description: Track Phoenix Point (Steam app 839770) achievement progress and investigate save files with the read-only `ppach` tool. Use when the user asks what achievements are left, why one has not unlocked, which save to reload for a story choice or ending, how a campaign is going (relations, wars, story variables, events), or what a game definition or event choice does.
+description: Track Phoenix Point (Steam app 839770) achievement progress and investigate save files with the read-only `ppach` tool. Use when the user asks what achievements are left, why one has not unlocked, which save to reload for a story choice or ending, how a campaign is going (relations, wars, story variables, events), or what a game definition or event choice does. Also use to write a bug report for the developers, to fix a cross-campaign achievement the game itself blocks by editing Options.jopt, and before changing the tool or skill, whose repository is public.
 ---
 
 # Phoenix Point achievements
@@ -96,8 +96,11 @@ their own. Example: [bug-reports/master-manufacturer-turret-magazines.md](bug-re
 - Include only what was actually checked. Drop claims you can't back up,
   and tell the user which statements they should verify in the game before
   sending.
-- Write it to `~/phoenix-point-<topic>-bug.md` and add a copy to
-  `bug-reports/` here.
+- Write the report the user sends to `~/phoenix-point-<topic>-bug.md`; it
+  keeps their real setup. The copy added to `bug-reports/` here is for the
+  public repository: replace the setup block with placeholders
+  (`<version>`, `<OS and version>`, `<list from ppach version>`) and leave
+  out dates and anything else that describes the user's own machine or play.
 - Where to send it (checked 2026-10-29; re-check if it matters):
   - Email `contact@snapshotgames.com`, listed on https://phoenixpoint.info/support
     (the page also mentions a contact form). Best for a formal report with
@@ -132,6 +135,21 @@ the steps are in [game-notes.md](game-notes.md) and the script is
    launch without the user doing anything; confirm it with `ppach steam`.
 6. After the game has saved again, compare the *resolved* content with
    `objgraph.top_level`, not the bytes: the game renumbers object ids.
+
+**Change the tool or this skill.** Both live in one **public** Git repository,
+the one `install.sh` links from (`readlink ~/.claude/skills/phoenix-point-achievements`
+shows where it is). Commit and push each change there. Before every commit:
+
+- Keep the user's setup out of tracked files and commit messages: Steam and
+  account ids, usernames and home paths, OS version, owned DLCs, play dates,
+  campaign progress and local backup locations. The game's own def names,
+  GUIDs and build number are fine.
+- Run a search over the diff for those, plus the user's actual Steam id and
+  account id (from the save directory name and `steam_autocloud.vdf`), and
+  credential patterns. A clean working tree says nothing about the commit
+  message, so check that too.
+- Once something personal has been pushed to a public repository, a later
+  rewrite does not retract it. Ask before pushing anything you are unsure of.
 
 ## Rules
 
