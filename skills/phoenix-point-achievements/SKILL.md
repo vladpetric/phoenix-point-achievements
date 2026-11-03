@@ -62,6 +62,16 @@ slow. Propose a keep list per campaign before deleting anything:
 - a few geoscape saves just before the final mission of finished campaigns,
   and the latest saves of campaigns with an ending still to win.
 
+When the user gives a name rule instead ("remove every save in campaign X
+whose name lacks `good`"), the keep list is every save of the *other*
+campaigns plus the matching saves in X: `--keep` deletes everything not on
+the list, across all campaigns. Build it from `ppach saves --last 1000`
+(the level is column 7, the campaign id column 6), for example
+`awk 'NR>1 && ($7!="Legend" || $1 ~ /good/) {print $1}'`. Present the
+deletions grouped by kind (geoscape, tactical mission chains), and name the
+user-named saves that would go (such as `great`, `ok`, `autosave_1`) so they
+can rescue them. Note whether the newest save survives.
+
 Confirm each candidate with `ppach save` / `events`, write the keep list (one
 save name per line) to the scratchpad, and show `ppach cloud --keep <file>`.
 Then delete only after the user says so, in this order, because Steam Cloud
@@ -70,11 +80,18 @@ syncs this game only when the game starts and exits:
 1. The user starts Phoenix Point and stays at the main menu. Check with
    `pgrep -il phoenix`.
 2. Delete the files from `ppach cloud --keep <file> --paths` (recheck the
-   plan first; the user may have saved since).
+   plan first; the user may have saved since). Write the paths to a
+   scratchpad file, check its count and that no kept name appears in it,
+   then `while IFS= read -r f; do rm -- "$f"; done < delete.txt` (the
+   paths contain spaces). Right after this, `ppach cloud` lists every
+   deleted save as "in the cloud but not local"; that is expected until
+   the game exits.
 3. The user quits the game normally. Steam then removes the deleted saves
    from the cloud and uploads kept saves that were local-only.
 4. Run `ppach cloud`: the file count should drop and nothing should be
-   listed as not synced or missing locally. Have the user start the game
+   listed as not synced or missing locally. The cloud count is the save
+   count plus a couple of non-save files. Steam itself can keep running;
+   only the game has to quit. Have the user start the game
    once more to confirm deleted saves did not come back.
 
 Deleting with the game closed risks Steam downloading the cloud copies
