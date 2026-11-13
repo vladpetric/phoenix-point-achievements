@@ -104,6 +104,17 @@ syncs this game only when the game starts and exits:
    only the game has to quit. Have the user start the game
    once more to confirm deleted saves did not come back.
 
+   If the user is already playing again when you check, judge success by
+   the deleted saves alone: none of them in the cloud and none back on
+   disk. Other differences are normal while the game runs. Saves made this
+   session stay local until the game exits. The game can replace an autosave
+   (for example `autosave_1` goes and `autosave` appears), which leaves the
+   old one listed as "in the cloud but not local" until the next exit. Not
+   every local-only keeper is uploaded on the first exit, either: some
+   older saves have stayed local-only for no known reason. They are still
+   safe on disk, so report them by name rather than treating them as a
+   failure.
+
 Deleting with the game closed risks Steam downloading the cloud copies
 again on the next launch. Turning Steam Cloud off doesn't help: the cloud
 copies stay and return when it is turned back on.
