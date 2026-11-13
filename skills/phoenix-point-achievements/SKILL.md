@@ -72,6 +72,16 @@ deletions grouped by kind (geoscape, tactical mission chains), and name the
 user-named saves that would go (such as `great`, `ok`, `autosave_1`) so they
 can rescue them. Note whether the newest save survives.
 
+A kind rule works the same way. "Clean up the in-mission saves except the
+last one" means: keep every geoscape save of every campaign plus the newest
+tactical save (the list is oldest first; kind is column 8), for example
+`awk 'NR>1 && ($8!="tactical" || $1=="<newest tactical>") {print $1}'`.
+When the user gives a rule like this and says the game is already at the
+main menu, the request is the go-ahead: build the lists, check that the kept
+and deleted counts add up to the save count and that no kept name is on the
+delete list, delete, then report what went (including named saves) and ask
+the user to quit the game so Steam Cloud syncs.
+
 Confirm each candidate with `ppach save` / `events`, write the keep list (one
 save name per line) to the scratchpad, and show `ppach cloud --keep <file>`.
 Then delete only after the user says so, in this order, because Steam Cloud
