@@ -82,6 +82,20 @@ and deleted counts add up to the save count and that no kept name is on the
 delete list, delete, then report what went (including named saves) and ask
 the user to quit the game so Steam Cloud syncs.
 
+A count rule thins one campaign: "keep about 6 geoscape saves, including the
+last, and only the most recent in-mission save". Keep every save of the other
+campaigns. In the target campaign, keep the newest geoscape save (usually
+`autosave`) plus picks spread over the in-game timeline, denser near the end,
+for example one before and one after each big mission. Keep the newest
+tactical save too. When two geoscape saves share an in-game day, keep the one
+saved later in real time: it is the branch the user kept playing. Show a
+table of the keepers (name, in-game date, real save time) and name every
+user-named save that would go. If the user didn't say the game is at the
+main menu and `pgrep` shows it running, ask before deleting: the newest
+save may be the mission they are playing. Once they say go ahead, recheck
+the plan, delete, and confirm the remaining saves match the keep list
+exactly (`diff` of sorted names).
+
 Confirm each candidate with `ppach save` / `events`, write the keep list (one
 save name per line) to the scratchpad, and show `ppach cloud --keep <file>`.
 Then delete only after the user says so, in this order, because Steam Cloud
