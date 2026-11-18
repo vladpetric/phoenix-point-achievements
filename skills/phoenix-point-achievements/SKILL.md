@@ -96,6 +96,14 @@ save may be the mission they are playing. Once they say go ahead, recheck
 the plan, delete, and confirm the remaining saves match the keep list
 exactly (`diff` of sorted names).
 
+A request with no rule ("another round of cleanups for campaign X") means a
+count rule on the current campaign: about 8 geoscape saves across the whole
+campaign plus the newest tactical save. Keep only a few early keepers from
+the last round and spend the rest on the stretch played since then, one
+around each big mission. Propose the plan first and delete only on the
+user's go-ahead. If the game is still running, their "go ahead" alone is
+enough, but first check that no save is newer than the plan.
+
 Confirm each candidate with `ppach save` / `events`, write the keep list (one
 save name per line) to the scratchpad, and show `ppach cloud --keep <file>`.
 Then delete only after the user says so, in this order, because Steam Cloud
@@ -127,7 +135,9 @@ syncs this game only when the game starts and exits:
    every local-only keeper is uploaded on the first exit, either: some
    older saves have stayed local-only for no known reason. They are still
    safe on disk, so report them by name rather than treating them as a
-   failure.
+   failure. A later clean exit can upload them: once, all 14 local-only
+   keepers went up together, and the cloud then held every local save.
+   `ppach cloud` showed "0 of them not in the cloud".
 
 Deleting with the game closed risks Steam downloading the cloud copies
 again on the next launch. Turning Steam Cloud off doesn't help: the cloud
