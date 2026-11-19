@@ -47,6 +47,17 @@ geoscape saves hold story state. Report the save's file name, the real-world
 time it was saved and its in-game date so the user can find it in the
 game's load screen.
 
+**Plan a campaign for a missing ending.** Read the ending's section in
+[game-notes.md](game-notes.md), and check that the achievement def names no
+difficulty (`ppach def AllEndings`). Then write a short checklist for the
+user: difficulty, which faction to ally with, the exact choice texts (from
+`ppach def <EVENT>_GeoscapeEventDef`), where to make a fork save, and when to
+ask Claude for a check of variables. Base the main-research steps on
+"Main story research to the final mission". Trace requirements with
+`ppach def <Research>_ResearchDef` and its `_ExistingResearchRequirementDef_<n>`
+defs, and take English names from `<Research>_ViewElementDef`. Save the
+checklist where the user asks, by default `~/phoenix-point-<topic>-plan.md`.
+
 **Explain an event or requirement.** `ppach def <EVENT>_GeoscapeEventDef`
 shows each choice's text and the variables it touches. Check
 [game-notes.md](game-notes.md) first; it covers the Project Vulture chain,
@@ -103,6 +114,17 @@ the last round and spend the rest on the stretch played since then, one
 around each big mission. Propose the plan first and delete only on the
 user's go-ahead. If the game is still running, their "go ahead" alone is
 enough, but first check that no save is newer than the plan.
+
+When the current campaign has just been won, a cleanup round thins it to
+the run-up to the final mission: two or three geoscape saves from after the
+last big mission, the newest geoscape save (usually `autosave`) and the
+newest tactical save. Check with `ppach steam` that its achievement landed,
+and keep the saves of campaigns that still have an ending to win.
+
+Steam Cloud holds only the newest saves up to a size cap, so after a long
+session older keepers drop out of the cloud. They are still safe on disk.
+Report them as local-only, and offer to copy them to a backup folder outside
+the synced save directory if the user wants a second copy.
 
 Confirm each candidate with `ppach save` / `events`, write the keep list (one
 save name per line) to the scratchpad, and show `ppach cloud --keep <file>`.

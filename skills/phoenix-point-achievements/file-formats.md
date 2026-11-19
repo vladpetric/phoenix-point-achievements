@@ -71,3 +71,7 @@ and `syncstate` (1 = synced). Auto-Cloud syncs this game when it starts and
 exits. The cloud held only the ~73 newest saves (about 155 MB), so older
 saves can be local-only. Saves deleted while the game was running were
 dropped from the cloud on exit, and local-only files were uploaded then.
+The cap pushes older saves out: after one long session of about 45 new
+saves, the cloud held only 25 files (about 155 MB), all from that session,
+and every older keeper was local-only again. After a prune and exit, only
+the newest few keepers came back to the cloud.

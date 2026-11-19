@@ -101,12 +101,53 @@ The two Synedrion endings depend on the story variables `Polyphonic` and
   after `Moon` = 1 (PROG_SY5 "Moonshot") and a research completion.
 
 To get both endings, reload a geoscape save from before PROG_SY3_WIN that
-has good Synedrion relations and play it twice. Find candidates with:
+has good Synedrion relations and play it twice. In a new campaign, pick
+PROG_SY1 choice 0 "Mist Repellers could help humanity regain its balance."
+(Polyphonic +2), then save just before PROG_SY3_WIN: sharing with the
+Terraformers gives 2–2 (a tie, so Terraformation) and sharing with Polyphonic
+gives 4–0. That one save forks the campaign into both endings. Check the
+variables after the Terraformer branch, because a random +1 can break the
+tie. The achievement def names no difficulty, so the easiest one works.
+Find fork candidates in an existing campaign with:
 
     ppach timeline --campaign <id> --rel 'SY>PX' --rel 'AN>SY' --var Polyphonic --var Terraformers
 
 Watch for an Anu–Synedrion war (the `war` column): once it starts, Synedrion
 havens can be wiped out quickly.
+
+### Main story research to the final mission
+
+The final mission opens with **PROG_PX "Knowledge is Power"**, which fires when
+`PX_VirophageInjectorBomb_ResearchDef` (Virophage Injector) completes. That
+event offers the faction final missions (PROG_PX_MISS, PROG_NJ5_MISS,
+PROG_AN8_MISS, PROG_SY6_MISS1/2). The story missions that unlock the research,
+in order:
+
+1. `PX_PhoenixProject` research → PROG_PX10 "Whatever Happened to Dr. Symes?"
+   (Symes retreat mission).
+2. Symes-notes sites PROG_PX12 "Frozen", PROG_PX11 "Rise By Sin, By Virtue
+   Fall" and the PROG_PX13 Cryolab mission "Cool Air" raise `PandoraVirus`;
+   PROG_PX131 "Progress" unlocks `PX_Pandoravirus` research.
+3. `PX_Pandoravirus` → PROG_PX132 "The Shadow of the Past" → PROG_PX14 time
+   vault mission (WIN "The Shattered Sphere"), which unlocks Antediluvian
+   Archaeology and the PROG_PX1 / PX15 missions.
+4. PROG_PX1_WIN "What They Died For" (Antarctic) sets `Sphere`, which unlocks
+   `PX_YuggothianEntity`.
+
+Virophage Injector needs (from the ExistingResearchRequirementDefs):
+
+- **Virophage Weapons** ← Pandoravirus + Pandoran Evolution (kill and capture
+  evolved Pandorans).
+- **Yuggothian Receptacle** ← Yuggothian Entity + Scylla Vivisection (Scylla
+  Autopsy + Pandoran Capture and Containment ← Pandoran Colonies, then a live
+  Scylla) + Pandoran Citadel (Pandoran Lair, which needs Colonies and
+  destroying a Lair, then destroying a Citadel).
+- **Pandoran Telepathic Nodule** ← Siren Vivisection ← Siren Autopsy (a dead
+  Siren, then a live one).
+
+Pandoran Colonies lists three reveal-site and three destroy-site
+requirements; whether all are needed is unchecked. The slow parts are the
+two live captures and the nest → Lair → Citadel assaults.
 
 ## Extreme Victory (Legend) and Under my Thumb
 
