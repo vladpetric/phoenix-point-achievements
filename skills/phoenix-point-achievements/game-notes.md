@@ -113,7 +113,15 @@ Find fork candidates in an existing campaign with:
     ppach timeline --campaign <id> --rel 'SY>PX' --rel 'AN>SY' --var Polyphonic --var Terraformers
 
 Watch for an Anu–Synedrion war (the `war` column): once it starts, Synedrion
-havens can be wiped out quickly.
+havens can be wiped out quickly. `AN>SY` drifts down early even with neutral
+play, so track its trend at each check.
+
+The chain between PROG_SY1 and Pirate King: PROG_SY7 (a Synedrion opinion
+event), then PROG_SY2 "Seeking the Firebird", which triggers on a Synedrion
+diplomacy change (`E_PROG_SY2_DiplomacyChanged`; the threshold is not in its
+strings, and one run saw it fire with SY>PX between 27 and 45), then the
+PROG_SY2 and PROG_SY3 missions, then PROG_SY3_WIN. PROG_SY1_WIN1 choice 0
+("Even if it's challenging…") leaves both ending variables unchanged.
 
 ### Main story research to the final mission
 

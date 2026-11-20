@@ -58,6 +58,30 @@ ask Claude for a check of variables. Base the main-research steps on
 defs, and take English names from `<Research>_ViewElementDef`. Save the
 checklist where the user asks, by default `~/phoenix-point-<topic>-plan.md`.
 
+**Check an ending run in progress.** When the user asks for a score or
+progress check on a run made from such a plan, read the plan first, then look
+only at that campaign (by its difficulty in `ppach campaigns`; the user may
+say to ignore the others):
+
+1. `ppach saves --campaign <id> --last 40` and take the newest *geoscape*
+   save (often a named one next to `autosave`). `pgrep -il phoenix` and
+   `ppach cloud` tell whether it is synchronized; a few newest saves being
+   local-only after a clean exit is normal.
+2. `ppach save <name>` for variables and relations, and `ppach events <name>
+   --match 'PROG_|CHAIN_' --text` for the story choices made so far. Compare
+   the ending variables with the plan; a variable that never changed is
+   absent from the list (= 0).
+3. `ppach timeline --campaign <id> --rel 'SY>PX' --rel 'AN>SY' --rel 'AN>PX'
+   --var <ending vars>` for trends. A steadily falling relation between two
+   factions is the early warning for a war that can wreck the chosen ally.
+4. Report: the score against the plan, story progress (the next story event
+   and what triggers it, from `ppach def`), a relations table with trends, and
+   short recommendations (the fork save, relation thresholds, research to
+   rush, the next check-in).
+
+Avoid `ppach dump --section Contents` for this: on a geoscape save it can
+take minutes. Story events and `save` output are enough.
+
 **Explain an event or requirement.** `ppach def <EVENT>_GeoscapeEventDef`
 shows each choice's text and the variables it touches. Check
 [game-notes.md](game-notes.md) first; it covers the Project Vulture chain,
