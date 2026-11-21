@@ -82,6 +82,29 @@ say to ignore the others):
 Avoid `ppach dump --section Contents` for this: on a geoscape save it can
 take minutes. Story events and `save` output are enough.
 
+"Check the newest save" means the newest save of *any* campaign, so run
+`ppach saves --last 8` without `--campaign`. When nothing is newer than the
+last check, say so, and don't repeat the full report. Saves can show up
+minutes after the time they carry: one check found no new saves, and
+five minutes later saves stamped half an hour earlier were on disk (probably a
+Steam Cloud download). So when the user says there should be a newer save, look
+again rather than arguing from the earlier listing. A newest save that is
+tactical shows no story state, so ask for a map save.
+
+When the user names the fork and the after-choice saves ("there should be a
+fork save and a post_choice save"), check both of them with `ppach save` and
+`ppach events --match 'PROG_SY'`. The fork must be a geoscape save that has
+the pre-choice score and no `<chain>_MISS` start for the deciding mission
+yet. The after-choice save must show the `_WIN` event with the planned
+choice text and the new score. Report the two side by side and accept the
+user's own name for the fork (for example `fork_sy` for the plan's
+`sy_fork`). Then offer a second copy of both outside the synced save folder:
+Steam Cloud keeps only the newest saves, so a fork made early drops out of
+the cloud. On a yes, copy them with `cp -p` into a dated folder under the
+user's backup location, write `SHA256SUMS`, and compare those sums with the
+originals. To restore, copy a save back into the save folder with the game
+closed or at the main menu.
+
 **Explain an event or requirement.** `ppach def <EVENT>_GeoscapeEventDef`
 shows each choice's text and the variables it touches. Check
 [game-notes.md](game-notes.md) first; it covers the Project Vulture chain,

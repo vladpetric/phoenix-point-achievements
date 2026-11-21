@@ -123,6 +123,16 @@ strings, and one run saw it fire with SY>PX between 27 and 45), then the
 PROG_SY2 and PROG_SY3 missions, then PROG_SY3_WIN. PROG_SY1_WIN1 choice 0
 ("Even if it's challenging…") leaves both ending variables unchanged.
 
+PROG_SY2_WIN's only choice, "We will deal with this would-be king.", puts
+PROG_SY3_MISS on the map: "The Man Who Would Be Pirate King", "Retrieve the
+lost Firebird Initiative files and reclaim the Phoenix Base from Tusk the
+Pirate King". Its briefing opens when an aircraft reaches the site
+(`GS_SiteVisited`). The Pirate King choice comes right after the mission is
+won, and the game can't save while that choice is on screen. So the fork save
+is a geoscape save made just before the aircraft lands, and a tactical save
+near the end of the fight saves replaying the mission. The win also raised
+SY>PX by 5 in one run (49 to 54).
+
 ### Main story research to the final mission
 
 The final mission opens with **PROG_PX "Knowledge is Power"**, which fires when
