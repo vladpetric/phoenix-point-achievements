@@ -64,7 +64,10 @@ only at that campaign (by its difficulty in `ppach campaigns`; the user may
 say to ignore the others):
 
 1. `ppach saves --campaign <id> --last 40` and take the newest *geoscape*
-   save (often a named one next to `autosave`). `pgrep -il phoenix` and
+   save (often a named one next to `autosave`). If the user played through
+   a cloud-gaming service (such as GeForce Now), the saves reach this machine
+   only after local Steam runs and syncs; when nothing new is on disk, say so
+   and ask the user to start Steam, then list again. `pgrep -il phoenix` and
    `ppach cloud` tell whether it is synchronized; a few newest saves being
    local-only after a clean exit is normal.
 2. `ppach save <name>` for variables and relations, and `ppach events <name>

@@ -94,7 +94,21 @@ The two Synedrion endings depend on the story variables `Polyphonic` and
   matters most. Share with Terraformers." (+2 Terraformers); choice 1 "We
   must heal, not dominate. Share with Polyphonic Tendency." (+2 Polyphonic);
   choice 2 "We don't do Synedrion drama. Share with both." (no change).
-- Random Synedrion events SY18, SY23, SY25 and SY29 add +1.
+- Four Synedrion side events, opened by a site visit (`GS_SiteVisited`),
+  are **choices**, not random bonuses. Each fires at most once:
+  - SY18 "Outvoted": "Support Dr. Aini's research." (Terraformers +1) or
+    "Decline.".
+  - SY23 "Shepherding Evolution": "It should be done because it's useful for
+    human beings." (Terraformers +1), "Every possibility of coexistence with
+    the new ecosystem is worth supporting." (Polyphonic +1), two neutral.
+  - SY25 "Matters of Faith": "Cultists should be forced to obey security
+    protocols or be expelled." (Terraformers +1), "Cultists deserve full
+    freedom, even if their beliefs are dangerous." (Polyphonic +1), "We
+    can't get involved." (neutral).
+  - SY29 "Nature's Dominion": "Liberation from Nature is the essence of
+    civilization." (Terraformers +1), "A healthy civilization would have a
+    balanced relationship with natural systems." (Polyphonic +1), two
+    neutral.
 - With relation above 74, the ending is fixed when **PROG_SY6_P "Liberty or
   Death"** (Polyphonic > Terraformers) or **PROG_SY6_T "The Master's Tools"**
   (Terraformers >= Polyphonic; **a tie goes to Terraformation**) fires,
@@ -105,9 +119,21 @@ has good Synedrion relations and play it twice. In a new campaign, pick
 PROG_SY1 choice 0 "Mist Repellers could help humanity regain its balance."
 (Polyphonic +2), then save just before PROG_SY3_WIN: sharing with the
 Terraformers gives 2–2 (a tie, so Terraformation) and sharing with Polyphonic
-gives 4–0. That one save forks the campaign into both endings. Check the
-variables after the Terraformer branch, because a random +1 can break the
-tie. The achievement def names no difficulty, so the easiest one works.
+gives 4–0. That one save forks the campaign into both endings. On the
+Terraformer branch never pick a Polyphonic answer in SY23/SY25/SY29: one +1
+breaks the tie.
+
+**Delaying the fork.** At 2–2 a single Polyphonic +1 from SY23, SY25 or SY29
+decides Polyphonic, so each of those events is a later fork than Pirate
+King, and the fork can move later with every one seen. The game can't save
+while the event is on screen and the triggering site is not known in
+advance, so keep a rolling geoscape save before each exploration-site
+landing. When one of the three appears, pick the Terraformers or neutral
+answer (Terraformation run) and keep the save from before that landing as
+the new fork (Polyphonic run picks the Polyphonic answer). The deadline is
+the first research completion after Moonshot, when PROG_SY6_P/T fires. These
+events may not appear at all, so keep the Pirate King fork as a fallback;
+slower Moonshot research gives them more time to appear. The achievement def names no difficulty, so the easiest one works.
 Find fork candidates in an existing campaign with:
 
     ppach timeline --campaign <id> --rel 'SY>PX' --rel 'AN>SY' --var Polyphonic --var Terraformers
@@ -122,6 +148,10 @@ diplomacy change (`E_PROG_SY2_DiplomacyChanged`; the threshold is not in its
 strings, and one run saw it fire with SY>PX between 27 and 45), then the
 PROG_SY2 and PROG_SY3 missions, then PROG_SY3_WIN. PROG_SY1_WIN1 choice 0
 ("Even if it's challenging…") leaves both ending variables unchanged.
+After PROG_SY3 the chain continues with PROG_SY4_P "Black Ops" (Zhara, on a
+Synedrion diplomacy change; "The Phoenix Project will help you stop
+them." starts PROG_SY4_MISS2) and PROG_SY8 ("Accept gift."); neither touches
+the ending variables.
 
 PROG_SY2_WIN's only choice, "We will deal with this would-be king.", puts
 PROG_SY3_MISS on the map: "The Man Who Would Be Pirate King", "Retrieve the
