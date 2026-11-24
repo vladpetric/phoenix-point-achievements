@@ -171,6 +171,23 @@ last big mission, the newest geoscape save (usually `autosave`) and the
 newest tactical save. Check with `ppach steam` that its achievement landed,
 and keep the saves of campaigns that still have an ending to win.
 
+A "full cleanup" covers every campaign at once. Finished campaigns go back
+to the keepers of their last round (read them from the notes of that round);
+campaigns with an ending still to win keep all their saves. The current
+campaign keeps every geoscape save (it is mid-story, and its fork saves are
+geoscape saves) plus the newest tactical save. Show the plan, then delete on
+the user's "go ahead"; a permission check may block the delete until the
+user has said it.
+
+**Resurrected saves.** Pruned saves of a finished campaign can come back
+weeks later: on disk with their original timestamps, local-only at first,
+and in the cloud after the next exit. The likely source is a second Steam
+client with its own copy of the save folder, such as a cloud-gaming session
+(GeForce Now), which uploads its old saves when it syncs. This has not been
+proven. When `ppach campaigns` shows a finished campaign with far more saves
+than its last prune left, prune it again to the same keepers. Then tell the
+user that a session on that other client may bring the saves back again.
+
 Steam Cloud holds only the newest saves up to a size cap, so after a long
 session older keepers drop out of the cloud. They are still safe on disk.
 Report them as local-only, and offer to copy them to a backup folder outside

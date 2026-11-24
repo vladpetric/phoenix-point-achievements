@@ -121,7 +121,11 @@ The two Synedrion endings depend on the story variables `Polyphonic` and
   unlocks **Moon Data Analysis**. Project Liberation needs Moon Data Analysis,
   **Project Domovoy** (`SYN_SafeZoneProject`: Neural Weapons + Pandoran
   Telepathic Nodule, so a live Siren capture) and Moon Mission Preparation.
-  Moonshot itself fixes nothing.
+  Moonshot itself fixes nothing. Its only choice, "That's where the Phoenix
+  Project comes in?", opens the launch-site defense mission PROG_SY5_MISS
+  (`E_PROG_SY5_MISS_SiteVisited`, so it starts when an aircraft lands on the
+  site). A geoscape save right after PROG_SY5 and before the mission is a
+  good "before Moonshot" save in each run.
 
 To get both endings, reload a geoscape save from before PROG_SY3_WIN that
 has good Synedrion relations and play it twice. In a new campaign, pick
