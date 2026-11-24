@@ -112,7 +112,16 @@ The two Synedrion endings depend on the story variables `Polyphonic` and
 - With relation above 74, the ending is fixed when **PROG_SY6_P "Liberty or
   Death"** (Polyphonic > Terraformers) or **PROG_SY6_T "The Master's Tools"**
   (Terraformers >= Polyphonic; **a tie goes to Terraformation**) fires,
-  after `Moon` = 1 (PROG_SY5 "Moonshot") and a research completion.
+  when the research **Project Liberation** (`SYN_ProjectLiberation_ResearchDef`)
+  completes (`E_PROG_SY6_T_ResearchCompleted` filters on it), with `Moon` = 1.
+  The chain: **Moon Mission Preparation** (`SYN_MoonMission`; needs SYN_Aircraft
+  + Yuggothian Entity, Synedrion pact/alliance) builds a launch zone in a
+  Synedrion haven; the zone completing fires PROG_SY5 "Moonshot"
+  (`GS_HavenZoneCompleted`), whose defense mission sets `Moon` = 1. That
+  unlocks **Moon Data Analysis**. Project Liberation needs Moon Data Analysis,
+  **Project Domovoy** (`SYN_SafeZoneProject`: Neural Weapons + Pandoran
+  Telepathic Nodule, so a live Siren capture) and Moon Mission Preparation.
+  Moonshot itself fixes nothing.
 
 To get both endings, reload a geoscape save from before PROG_SY3_WIN that
 has good Synedrion relations and play it twice. In a new campaign, pick
@@ -131,9 +140,9 @@ advance, so keep a rolling geoscape save before each exploration-site
 landing. When one of the three appears, pick the Terraformers or neutral
 answer (Terraformation run) and keep the save from before that landing as
 the new fork (Polyphonic run picks the Polyphonic answer). The deadline is
-the first research completion after Moonshot, when PROG_SY6_P/T fires. These
-events may not appear at all, so keep the Pirate King fork as a fallback;
-slower Moonshot research gives them more time to appear. The achievement def names no difficulty, so the easiest one works.
+the completion of Project Liberation, when PROG_SY6_P/T fires. These events
+may not appear at all, so keep the Pirate King fork as a fallback; delaying
+Project Liberation (or Project Domovoy) gives them more time to appear. The achievement def names no difficulty, so the easiest one works.
 Find fork candidates in an existing campaign with:
 
     ppach timeline --campaign <id> --rel 'SY>PX' --rel 'AN>SY' --var Polyphonic --var Terraformers
