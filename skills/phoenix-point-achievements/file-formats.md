@@ -58,6 +58,32 @@ stored as names. Localization entries are `"Category/KEY"`, padding, an
 int32 language count, then one length-prefixed string per language with
 English first. Event texts use keys such as `PROG_SY3_WIN_CHOICE_0_TEXT`.
 
+### Reading a condition's operator
+
+`ppach def` prints only a def's strings, so it hides the operator of a
+variable comparison (`[<EVENT>] Condition <n>`). Never infer the operator
+from which variable is listed first. In the raw bytes the condition holds
+a variable name, a second variable name (an empty string when the variable
+is compared with a number), an int32 value and an int32 operator. Strings
+are int32-length-prefixed and padded to 4 bytes. So `[PROG_SY6_P] Condition
+2` is `Polyphonic`, `Terraformers`, 0, 32 (Polyphonic >= Terraformers) and
+`[PROG_SY6_P] Condition 3` is `Moon`, "", 1, 8 (Moon == 1). Dump them with
+the cache venv:
+
+    cd <repo> && ~/.cache/ppach/venv/bin/python -c '
+    import sys; sys.path.insert(0, ".")
+    from ppach import gamedata
+    A = gamedata.Assets()
+    b = A.raw(A.byname["[PROG_SY6_P] Condition 2"]); print(b.hex(" ", 4))'
+
+The game's `ComparisonOperator` enum: None 0, Less 2, Greater 4, Equal 8,
+LessOrEqual 16, GreaterOrEqual 32 (`DiplomacyOperator`: Greater 0, Less 1).
+To re-read an enum after a game update, install `dnfile` into a scratch venv
+(not the ppach one) and read the `Constant` rows of the enum's fields in
+`PhoenixPointOSX.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll`.
+The type names are `ComparisonOperator`, `VariableCompareOperator` and
+`DiplomacyOperator`.
+
 ## Steam stats cache
 
 Binary KeyValues. The schema maps each stat id to either a counter or a

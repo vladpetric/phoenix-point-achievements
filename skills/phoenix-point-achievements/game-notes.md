@@ -110,8 +110,8 @@ The two Synedrion endings depend on the story variables `Polyphonic` and
     balanced relationship with natural systems." (Polyphonic +1), two
     neutral.
 - With relation above 74, the ending is fixed when **PROG_SY6_P "Liberty or
-  Death"** (Polyphonic > Terraformers) or **PROG_SY6_T "The Master's Tools"**
-  (Terraformers >= Polyphonic; **a tie goes to Terraformation**) fires,
+  Death"** (Polyphonic >= Terraformers) or **PROG_SY6_T "The Master's Tools"**
+  (Terraformers > Polyphonic; **a tie goes to Polyphonic**) fires,
   when the research **Project Liberation** (`SYN_ProjectLiberation_ResearchDef`)
   completes (`E_PROG_SY6_T_ResearchCompleted` filters on it), with `Moon` = 1.
   The chain: **Moon Mission Preparation** (`SYN_MoonMission`; needs SYN_Aircraft
@@ -127,26 +127,45 @@ The two Synedrion endings depend on the story variables `Polyphonic` and
   site). A geoscape save right after PROG_SY5 and before the mission is a
   good "before Moonshot" save in each run.
 
-To get both endings, reload a geoscape save from before PROG_SY3_WIN that
-has good Synedrion relations and play it twice. In a new campaign, pick
-PROG_SY1 choice 0 "Mist Repellers could help humanity regain its balance."
-(Polyphonic +2), then save just before PROG_SY3_WIN: sharing with the
-Terraformers gives 2–2 (a tie, so Terraformation) and sharing with Polyphonic
-gives 4–0. That one save forks the campaign into both endings. On the
-Terraformer branch never pick a Polyphonic answer in SY23/SY25/SY29: one +1
-breaks the tie.
+How the comparison was settled: an earlier version of these notes had the
+tie backwards, and a 2–2 run got "Liberty or Death". `[PROG_SY6_P] Condition
+2` stores `Polyphonic`, `Terraformers` and operator 32; `[PROG_SY6_T]
+Condition 2` stores `Terraformers`, `Polyphonic` and operator 4. The game's
+`ComparisonOperator` enum (Assembly-CSharp.dll) is None 0, Less 2, Greater 4,
+Equal 8, LessOrEqual 16, GreaterOrEqual 32. See "Reading a condition's
+operator" in [file-formats.md](file-formats.md).
 
-**Delaying the fork.** At 2–2 a single Polyphonic +1 from SY23, SY25 or SY29
-decides Polyphonic, so each of those events is a later fork than Pirate
-King, and the fork can move later with every one seen. The game can't save
-while the event is on screen and the triggering site is not known in
-advance, so keep a rolling geoscape save before each exploration-site
-landing. When one of the three appears, pick the Terraformers or neutral
-answer (Terraformation run) and keep the save from before that landing as
-the new fork (Polyphonic run picks the Polyphonic answer). The deadline is
-the completion of Project Liberation, when PROG_SY6_P/T fires. These events
-may not appear at all, so keep the Pirate King fork as a fallback; delaying
-Project Liberation (or Project Domovoy) gives them more time to appear. The achievement def names no difficulty, so the easiest one works.
+To get both endings from one campaign, the Terraformers must end strictly
+ahead in one branch. In a new campaign, pick PROG_SY1 choice 1 "The planet is
+ours, and we should take direct control of its ecosystems." (Terraformers
++2), then save just before PROG_SY3_WIN (the fork):
+
+- **Terraformation:** "Humanity matters most. Share with Terraformers." gives
+  0–4.
+- **Polyphonic:** "We must heal, not dominate. Share with Polyphonic
+  Tendency." gives 2–2, and a tie goes to Polyphonic.
+
+On the Polyphonic branch never pick a Terraformers answer in
+SY18/SY23/SY25/SY29: one +1 breaks the tie. "Share with both" changes
+nothing, so it is not a fork. Starting with PROG_SY1 choice 0 (Polyphonic
++2) instead makes both Pirate King answers Polyphonic (2–2 or
+4–0); the Terraformation branch then needs a Terraformers +1 from a side
+event, and in one run none of SY18/23/25/29 appeared in six in-game weeks.
+
+**Delaying the fork.** At a 2–2 tie a single Terraformers +1 (SY18 "Support
+Dr. Aini's research.", or the Terraformers answer of SY23, SY25 or SY29)
+decides Terraformation, so each of those events is a later fork than Pirate
+King. The game can't save while the event is on screen and the triggering
+site is not known in advance, so keep a rolling geoscape save before each
+site landing. When one appears, pick a Polyphonic or neutral answer
+(Polyphonic run) and keep the save from before that landing as the new fork
+(the Terraformation run picks the Terraformers answer). The deadline is the
+completion of Project Liberation, when PROG_SY6_P/T fires. These events may
+not appear at all, so keep the Pirate King fork as a fallback; delaying
+Project Liberation (or Project Domovoy) gives them more time to appear. A
+geoscape save from just before Project Liberation completes is the last
+chance to change the ending; back it up. The achievement def names no
+difficulty, so the easiest one works.
 Find fork candidates in an existing campaign with:
 
     ppach timeline --campaign <id> --rel 'SY>PX' --rel 'AN>SY' --var Polyphonic --var Terraformers

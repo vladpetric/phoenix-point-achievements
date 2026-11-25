@@ -58,6 +58,14 @@ ask Claude for a check of variables. Base the main-research steps on
 defs, and take English names from `<Research>_ViewElementDef`. Save the
 checklist where the user asks, by default `~/phoenix-point-<topic>-plan.md`.
 
+A plan that depends on a comparison between variables (a tie, a lead of
+one) must rest on the condition's operator, read from its raw bytes as
+described in "Reading a condition's operator" in
+[file-formats.md](file-formats.md). `ppach def` lists only the variable
+names, and the order in which they are listed does not tell which operator
+is used: one plan assumed a 2–2 tie went to Terraformation, and the run
+locked in Polyphonic instead.
+
 **Check an ending run in progress.** When the user asks for a score or
 progress check on a run made from such a plan, read the plan first, then look
 only at that campaign (by its difficulty in `ppach campaigns`; the user may
@@ -107,6 +115,14 @@ the cloud. On a yes, copy them with `cp -p` into a dated folder under the
 user's backup location, write `SHA256SUMS`, and compare those sums with the
 originals. To restore, copy a save back into the save folder with the game
 closed or at the main menu.
+
+When the user reports that the ending event has fired ("I reached Liberty or
+Death"), check that the event matches the plan's branch. If it doesn't,
+read the condition operators before explaining anything (see above), say
+plainly which ending this run now gives, and work out what each existing
+fork save can still reach. Name the last geoscape save from before the
+event (the only one that can still change the ending) and offer to back it
+up together with the save where the ending locked.
 
 **Explain an event or requirement.** `ppach def <EVENT>_GeoscapeEventDef`
 shows each choice's text and the variables it touches. Check
