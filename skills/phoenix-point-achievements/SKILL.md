@@ -139,6 +139,20 @@ shows each choice's text and the variables it touches. Check
 [game-notes.md](game-notes.md) first; it covers the Project Vulture chain,
 the Synedrion ending split and the unbuildable turret magazines.
 
+When the user names an event by its English title, the def is often not
+`SY<n>` or `PROG_SY<n>`: follow-ups have suffixes (`_WIN1`, `_MISS2`, …),
+and `ppach def` searches def names, not titles. Find the key in the game
+data instead: `LC_ALL=C strings -n 6 <sharedassets0.assets> | LC_ALL=C grep
+-n -B3 -A3 '<Title>'`. The English title sits right after the
+`Progression/<KEY>_TITLE` (or `<Faction>/…`) line, followed by its
+translations; then run `ppach def <KEY>_GeoscapeEventDef`. Don't loop
+`ppach def` over many numbers: each call takes seconds. A choice moves an
+ending variable only when the def lists that variable's name (`Polyphonic`,
+`Terraformers`); if the def names none, say any answer is safe and offer to
+confirm it from the next map save. That save has to be from after the
+event: an autosave made at a mission's start doesn't show the mission's
+`_WIN` event yet.
+
 **Prune saves.** Hundreds of saves make the game's save and load screens
 slow. Propose a keep list per campaign before deleting anything:
 
@@ -204,6 +218,15 @@ campaign keeps every geoscape save (it is mid-story, and its fork saves are
 geoscape saves) plus the newest tactical save. Show the plan, then delete on
 the user's "go ahead"; a permission check may block the delete until the
 user has said it.
+
+When the user widens a round on the current campaign ("you can clean up
+other campaigns as well"), it becomes a full cleanup, but the current
+campaign keeps the count-rule plan already shown. Saves played after the last
+round of a finished campaign usually belong to a side branch, such as a
+second try at an ending. Check the newest one with `ppach save` / `events`.
+If that branch has locked an ending that doesn't help (the ending event
+fired with the wrong branch), prune it back to the last keepers and name the
+user-named saves that go. If it can still reach an open ending, keep it.
 
 **Resurrected saves.** Pruned saves of a finished campaign can come back
 weeks later: on disk with their original timestamps, local-only at first,

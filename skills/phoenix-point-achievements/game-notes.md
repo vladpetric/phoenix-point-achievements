@@ -95,7 +95,15 @@ The two Synedrion endings depend on the story variables `Polyphonic` and
   (Terraformers). It triggers on a Synedrion diplomacy change
   (`E_PROG_SY1_DiplomacyChanged`; the threshold is not in its strings). In
   one run it had fired by in-game 2047-01-22, with SY>PX near 36; another
-  run had not seen it by 01-14, at SY>PX 11.
+  run had not seen it by 01-14, at SY>PX 11. Each choice opens its own
+  mission (`PROG_SY1_MISS1` / `MISS2`).
+- The after-mission messages of Deadlock don't touch either variable; any
+  answer is safe. `PROG_SY1_WIN1` "Against the Mist" (after the Polyphonic
+  mission) and `PROG_SY1_WIN2` "Biogenesis" (after the Terraformers
+  mission; its choice 1 reads "The Polyphonic Tendency is right. We must
+  learn to live on the planet, not just own it."). Their defs name neither
+  variable, unlike PROG_SY1 and PROG_SY3_WIN, and a save made after
+  Biogenesis kept the score unchanged.
 - **PROG_SY3_WIN "The Man Who Would Be Pirate King"**: choice 0 "Humanity
   matters most. Share with Terraformers." (+2 Terraformers); choice 1 "We
   must heal, not dominate. Share with Polyphonic Tendency." (+2 Polyphonic);
