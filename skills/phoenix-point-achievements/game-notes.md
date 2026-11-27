@@ -89,7 +89,13 @@ length whichever faction you back.
 The two Synedrion endings depend on the story variables `Polyphonic` and
 `Terraformers`:
 
-- **PROG_SY1** choice: +2 to one of them.
+- **PROG_SY1 "Deadlock"** choice: +2 to one of them. Choice 0 "Mist
+  Repellers could help humanity regain its balance." (Polyphonic); choice 1
+  "The planet is ours, and we should take direct control of its ecosystems."
+  (Terraformers). It triggers on a Synedrion diplomacy change
+  (`E_PROG_SY1_DiplomacyChanged`; the threshold is not in its strings). In
+  one run it had fired by in-game 2047-01-22, with SY>PX near 36; another
+  run had not seen it by 01-14, at SY>PX 11.
 - **PROG_SY3_WIN "The Man Who Would Be Pirate King"**: choice 0 "Humanity
   matters most. Share with Terraformers." (+2 Terraformers); choice 1 "We
   must heal, not dominate. Share with Polyphonic Tendency." (+2 Polyphonic);

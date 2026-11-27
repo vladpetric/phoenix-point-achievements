@@ -69,7 +69,9 @@ locked in Polyphonic instead.
 **Check an ending run in progress.** When the user asks for a score or
 progress check on a run made from such a plan, read the plan first, then look
 only at that campaign (by its difficulty in `ppach campaigns`; the user may
-say to ignore the others):
+say to ignore the others). When two campaigns share a difficulty, the new run
+is the one whose in-game dates start at 2047-01-01 and whose last save is the
+newest:
 
 1. `ppach saves --campaign <id> --last 40` and take the newest *geoscape*
    save (often a named one next to `autosave`). If the user played through
@@ -89,6 +91,14 @@ say to ignore the others):
    and what triggers it, from `ppach def`), a relations table with trends, and
    short recommendations (the fork save, relation thresholds, research to
    rush, the next check-in).
+
+   Early in a run, before the first deciding event has fired, a score of
+   0–0 is on plan. Then give the exact choice text to pick when it appears
+   (from `ppach def <EVENT>_GeoscapeEventDef`) and what triggers it. When the
+   threshold of a trigger isn't readable, compare with an earlier campaign
+   instead: `ppach timeline --campaign <old id> --rel 'SY>PX' --var <var>`
+   shows roughly when and at what relation the event fired there. Say that
+   this is an estimate.
 
 Avoid `ppach dump --section Contents` for this: on a geoscape save it can
 take minutes. Story events and `save` output are enough.
